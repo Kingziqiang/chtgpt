@@ -1,0 +1,45 @@
+---
+import Main from '@modules/Main';
+import type { Lang } from '@interfaces';
+import Layout from '@/layouts/Layout.astro';
+import 'katex/dist/katex.min.css';
+import 'highlight.js/styles/atom-one-dark.css';
+
+// read lang from env/process.env
+const lang: Lang = import.meta.env.LANGUAGE || process.env.LANGUAGE || 'en';
+// read inVercel from process.env
+const inVercel = !!process.env.VERCEL;
+---
+
+<Layout title="ChatGPT">
+  <div id="container" class="container-default">
+    <Main lang={lang} inVercel={inVercel} client:only="react" />
+  </div>
+</Layout>
+
+<style is:global>
+  .container-default {
+    max-width: 1200px;
+    width: 80vw;
+    height: 80vh;
+  }
+
+  .container-loose {
+    max-width: 1800px;
+    width: 90vw;
+    height: 90vh;
+  }
+
+  .container-full {
+    width: 100vw;
+    height: 100vh;
+  }
+
+  /* mobile style */
+  @media screen and (max-width: 768px) {
+    #container {
+      width: 100vw;
+      height: 100%;
+    }
+  }
+</style>
